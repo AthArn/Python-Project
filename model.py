@@ -1,4 +1,4 @@
-import numpy as np 
+import numpy as nm
 import keras
 from keras.layers import Dense,Flatten,Dropout,Input
 from keras.layers.convolutional import Conv2D,MaxPooling2D
@@ -8,17 +8,17 @@ from keras.callbacks import ModelCheckpoint,CSVLogger
 import os
 
 
-labels = np.genfromtxt(r'./data/train.csv',delimiter = ',',skip_header = 1,skip_footer = 0, usecols = 0, dtype = np.int32)
-train = np.genfromtxt(r'./data/train.csv',delimiter=',',skip_header=1,skip_footer = 0, usecols = range(1,785))
+labels = nm.genfromtxt(r'./data/train.csv',delimiter = ',',skip_header = 1,skip_footer = 0, usecols = 0, dtype = nm.int32)
+train = nm.genfromtxt(r'./data/train.csv',delimiter=',',skip_header=1,skip_footer = 0, usecols = range(1,785))
 
-labels = np.eye(np.max(labels)+1)[labels]
-train = np.array([data.reshape(28,28,1) for data in train])
+labels = nm.eye(nm.max(labels)+1)[labels]
+train = nm.array([data.reshape(28,28,1) for data in train])
 
 os.system('rmdir /S /Q "{}"'.format('./models/'))
 os.makedirs('{0}/'.format('./models/'))
 
 train_gen = ImageDataGenerator(zoom_range = 0.2,rotation_range = 30,width_shift_range = 0.2,height_shift_range = 0.2)
-#train_gen = ImageDataGenerator()
+
 inp = Input(shape = (28,28,1), dtype = 'float32')
 
 model = Conv2D(16,(3,3),padding='same',activation='relu')(inp)
