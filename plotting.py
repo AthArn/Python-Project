@@ -1,13 +1,9 @@
-import matplotlib.pyplot as plt
-import numpy as np 
-
-data = np.loadtxt('history.log',skiprows=1,delimiter=',')
-
+import matplotlib.pyplot as pl
+import numpy as nm
+data = nm.loadtxt('history.log',skiprows=1,delimiter=',')
 epoch = data[:,0]
 acc = data[:,3]
 loss = data[:,4]
-
-plt.plot(epoch,acc,'r')
-plt.plot(epoch,loss,'b')
-
-plt.show()
+pl.plot(epoch,acc,'r')
+pl.plot(epoch,loss,'b')
+pl.show()
